@@ -17,8 +17,13 @@ class localization
     public function handle(Request $request, Closure $next)
     {
 
-        $local = ($request->local) == "" ?  'en' : $request->local ;
+        $local = ($request->local);
 
+        if(!in_array($local, ['en', 'ru', 'kz'])) {
+            $local = 'en';
+        }
+
+        app()->getLocale();
 
 
         app()->setLocale($local);
